@@ -19,21 +19,24 @@
 from bs4 import BeautifulSoup 
 import requests
 
-birthday_url = "https://www.ellamila.com/collections/nail-gifts-value-sets/products/birthday-collection"
+birthday_url = ["https://www.ellamila.com/collections/featured-collections/products/me-collection-10-pack",
+                "https://www.ellamila.com/collections/featured-collections/products/dream-collection-8-pack"]
 
-birthday_result = requests.get(birthday_url)
-birthday_doc = BeautifulSoup(birthday_result.text, "html.parser")
+for i in range(len(birthday_url)):
+    birthday_result = requests.get(birthday_url[i])
+    birthday_doc = BeautifulSoup(birthday_result.text, "html.parser")
 
 
-birthday_parent = birthday_doc.find_all("span")
-colorstr = ""
-for i in range(len(birthday_parent)):
-    if "Color" in birthday_parent[i].text:
-        colorstr = birthday_parent[i].text
-        break
+    birthday_parent = birthday_doc.find_all("span")
+    colorstr = ""
+    for i in range(len(birthday_parent)):
+        if "Color" in birthday_parent[i].text:
+            colorstr = birthday_parent[i].text
+            break
 
-print(colorstr)
-print(" ")
-print(colorstr.split(": ")[1].split(", "))
+    print(colorstr)
+    print(" ")
+    print(colorstr.split(":")[1].split(", "))
+    print("\n\n")
 
     
