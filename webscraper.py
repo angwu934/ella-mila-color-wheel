@@ -19,11 +19,14 @@ import requests
 
 #Get colors for each collection
 urls = ["https://www.ellamila.com/collections/nail-gifts-value-sets/products/enchanted-collection",
-        "https://www.ellamila.com/collections/featured-collections/products/me-collection-10-pack",
-        "https://www.ellamila.com/collections/featured-collections/products/dream-collection-8-pack",
         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-c",
         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/gliiter-collection",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/samba-collection-b"]
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/samba-collection-b",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-b",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/love-collection-10-pack",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/elite-b-collection",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/bonbon-collection-8-pack",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/love-collection-b"]
 
 collections = []
 
