@@ -17,16 +17,29 @@ import requests
 
 # print(color_names)
 
+# Get URLs for each collection
+with open("collectionsets.html", "r") as f:
+    collectionsdoc = BeautifulSoup(f, "html.parser")
+individualcollectionurls = collectionsdoc.find_all("a", {"class": "product-info__caption"})
+urls = []
+for i in range(len(individualcollectionurls)):
+    href = individualcollectionurls[i].get("href")
+    if "nail-care" not in href:
+        urls.append(href)
+
+# print(individualcollectionurls[0])
+
+
 #Get colors for each collection
-urls = ["https://www.ellamila.com/collections/nail-gifts-value-sets/products/enchanted-collection",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-c",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/gliiter-collection",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/samba-collection-b",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-b",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/love-collection-10-pack",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/elite-b-collection",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/bonbon-collection-8-pack",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/love-collection-b"]
+# urls = ["https://www.ellamila.com/collections/nail-gifts-value-sets/products/enchanted-collection",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-c",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/gliiter-collection",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/samba-collection-b",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-b",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/love-collection-10-pack",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/elite-b-collection",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/bonbon-collection-8-pack",
+#         "https://www.ellamila.com/collections/nail-gifts-value-sets/products/love-collection-b"]
 
 collections = []
 
@@ -43,8 +56,12 @@ for i in range(len(urls)):
         if "Color" in parent[i].text:
             colorstr = parent[i].text
             break
-
-    colorarr = colorstr.split(":")[1].split(", ")
+    
+    colorarr = []
+    if "Color" in colorstr:
+        colorarr = colorstr.split(":")[1].split(", ")
+    else:
+        colorarr = colorstr.split(", ")
     colorarr.insert(0, title)
     collections.append(colorarr)
 
