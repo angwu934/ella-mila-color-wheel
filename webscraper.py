@@ -1,5 +1,8 @@
-# from bs4 import BeautifulSoup
 
+from bs4 import BeautifulSoup
+import requests
+
+#Get all of the colors:
 # with open("nailpolishcolors.html", "r") as f:
 #     doc = BeautifulSoup(f, "html.parser")
 
@@ -13,14 +16,11 @@
 #         color_names.append(name)
 
 # print(color_names)
-# print(type(tags))
-# print(type(tags[5]))
 
-from bs4 import BeautifulSoup 
-import requests
-
-birthday_url = ["https://www.ellamila.com/collections/featured-collections/products/me-collection-10-pack",
-                "https://www.ellamila.com/collections/featured-collections/products/dream-collection-8-pack"]
+#Get colors for each collection
+urls = ["https://www.ellamila.com/collections/featured-collections/products/me-collection-10-pack",
+        "https://www.ellamila.com/collections/featured-collections/products/dream-collection-8-pack",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/enchanted-collection",]
 
 for i in range(len(birthday_url)):
     birthday_result = requests.get(birthday_url[i])
