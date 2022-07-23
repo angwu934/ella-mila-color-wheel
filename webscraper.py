@@ -18,25 +18,33 @@ import requests
 # print(color_names)
 
 #Get colors for each collection
-urls = ["https://www.ellamila.com/collections/featured-collections/products/me-collection-10-pack",
+urls = ["https://www.ellamila.com/collections/nail-gifts-value-sets/products/enchanted-collection",
+        "https://www.ellamila.com/collections/featured-collections/products/me-collection-10-pack",
         "https://www.ellamila.com/collections/featured-collections/products/dream-collection-8-pack",
-        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/enchanted-collection",]
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/dream-collection-c",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/gliiter-collection",
+        "https://www.ellamila.com/collections/nail-gifts-value-sets/products/samba-collection-b"]
 
-for i in range(len(birthday_url)):
-    birthday_result = requests.get(birthday_url[i])
-    birthday_doc = BeautifulSoup(birthday_result.text, "html.parser")
+collections = []
 
+for i in range(len(urls)):
+    result = requests.get(urls[i])
+    doc = BeautifulSoup(result.text, "html.parser")
 
-    birthday_parent = birthday_doc.find_all("span")
+    titletag = doc.find_all("h1", {"class": "product_name"})
+    title = titletag[0].text
+
+    parent = doc.find_all("span")
     colorstr = ""
-    for i in range(len(birthday_parent)):
-        if "Color" in birthday_parent[i].text:
-            colorstr = birthday_parent[i].text
+    for i in range(len(parent)):
+        if "Color" in parent[i].text:
+            colorstr = parent[i].text
             break
 
-    print(colorstr)
-    print(" ")
-    print(colorstr.split(":")[1].split(", "))
-    print("\n\n")
+    colorarr = colorstr.split(":")[1].split(", ")
+    colorarr.insert(0, title)
+    collections.append(colorarr)
+
+print(collections)
 
     
